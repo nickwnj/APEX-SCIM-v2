@@ -1,0 +1,314 @@
+<html>
+<head>
+    <title>APEX SCIM - Admin Guide</title>
+
+    <style>
+        body {background-color: lightgray;}
+        img {
+                width: 800px;
+                display: block;
+                margin: 5px;
+                object-fit: contain;
+            }
+         span.heavy{font-weight: bold;}  
+    </style>
+</head>
+<body>
+    <h1>APEX SCIM Administration Guide</h1>
+    <p>Release 1.0</p>
+    <h2>Contents</h2>
+    <ul>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#clientuser">Creating the Client User</a></li>
+        <li><a href="#oauth">Configuring OAUTH Authentication</a></li>
+        <li><a href="#apppages">Application Pages</a></li>
+        <li><a href="#okta">Integrating With Okta</a></li>
+        <li><a href="#azure">Integrating With Azure</a></li>
+    </ul>
+    <h2><a  name="installation">Installation</a></h2>
+    <p>Installation contains thse high level steps:</p>
+    <ul>
+        <li>Installing the Database</li>
+        <li>Installing the APEX Application</li>
+        <li>Installing the REST Module</li>
+        <li>Post Install Config</li>
+    </ul>
+    <h3>Installing the Database</h3>
+    <ol>
+        <li>
+            <p>Logon to the workspace and go to <span class="heavy">SQL Workshop -> SQL Scripts</span></p>
+            <img src="images/install1.jpg" alt="SQL Workshop Menu"/>          
+        </li>
+        <li>
+            <p>Click <span class="heavy">Upload</span>.  Select the <span class="heavy">installscim.sql</span> file and give it a name.  Click <span class="heavy">Upload</span>.</p>
+            <img src="images/install2.jpg"/>          
+        </li>   
+        <li>
+            <p>Click the arrow icon in the <span class="heavy">Run</span> column.</p>
+            <img src="images/install3.jpg"/>   
+        </li>   
+        <li>
+            <p>Click the <span class="heavy">Run Now</span> button.</p>
+            <img src="images/install4.jpg"/>        
+        </li> 
+        </ol>    
+        <h3>Installing the APEX Application</h3>
+        <ol>    <li>
+            <p>Go to  <span class="heavy">App Builder</span> -> <span class="heavy">Import</span>.  </p>
+            <img src="images/install5a.jpg"/> 
+            </li>
+                <li>
+                <p>
+                Select the  <span class="heavy">apex_scim_app.sql</span> file.</p>
+            <img src="images/install5.jpg"/>   
+            </li><li>
+                <p>
+                    Click the <span class="heavy">Install Application</span> button.</p>
+            <img src="images/install6.jpg"/> 
+            <img src="images/install7.jpg"/> 
+        </li> 
+    </ol>    
+    <h3>Installing the REST Module</h3>
+    <ol><li>
+            <p>Go to <span class="heavy">SQL Workshop -> RESTful Services</span>. Click <span class="heavy">Register Schema with ORDS.</span></p>
+            <img src="images/install8.jpg"/>   
+            <img src="images/install9.jpg"/>
+        </li>      
+        <li>
+            <p>Click <span class="heavy">Save Schema Attributes</span></p>
+            <img src="images/install10.jpg"/>          
+        </li>
+        <li>
+            <p>Go to <span class="heavy">SQL Workshop -> SQL Scripts</span></p>
+            <img src="images/install1.jpg" alt="SQL Workshop Menu"/>          
+        </li> 
+        <li>
+            <p>Click <span class="heavy">Upload</span>. Select the <span class="heavy">installrest.sql</span> file.  Click <span class="heavy">Upload</span>.</p>
+            <img src="images/install11.jpg"/>    
+</li><li>
+    <p>Click the <span class="heavy">Run Now</span> button.</p>
+            <img src="images/install13.jpg"/>   
+        </li>
+        </ol>
+        <h3>Post Install Config</h3>
+        <p>The following Post Install Config steps are required to populate the resource schema attributes.  These steps can be completed again to customize the attributes.</p>
+        <ol>
+        <li>
+            <p>Run the application and parse the default resource schemas. Click <span class="heavy">Config</span> -> <span class="heavy">Document Store</span>.</p>
+            <img src="images/install14.jpg"/>   
+            </li>
+            <li>
+            <p>Click the <span class="heavy">pencil</span> next to Group.  </span></p> 
+            <img src="images/install15.jpg"/>    
+            </li>
+            <li>
+                <p>Click <span class="heavy">Parse Group Schema.</p>
+                    <img src="images/install16.jpg"/>
+                    <img src="images/install17.jpg"/>  
+            </li>
+        </li>
+        <li>
+            <p>Click the <span class="heavy">pencil</span> next to User.</p> 
+            <img src="images/install18.jpg"/>    
+            </li>
+            <li>
+                <p>Click <span class="heavy">Parse User Schema</span>.</p>
+                <img src="images/install19.jpg"/> 
+                <img src="images/install17.jpg"/>  
+            </li>
+            <p>The installation is now complete.  You must either create a client user or configure OAUTH in order to invoke the server.</p> 
+        </li>    
+        <h2><a name="clientuser">Creating the Client User</a></h2>
+        <ol>
+            <li><p>Go to <span class="heavy">Administration</span> -> <span class="heavy">Users and Groups</span></p>
+                <img src="images/createuser1.jpg"/>  
+            </li>
+            <li><p>Click <span class="heavy">Create User.</span></p>
+                <img src="images/createuser2.jpg"/>
+             </li>
+             <li>
+                <p>Provide the required values.</p>
+                <img src="images/createuser3.jpg"/>  
+                <p>Set the password appropriately.  This will not be an interactive account so toggle the <span class="heavy">Require Change of Password on First Use</span> switch.
+                    <br/>Assign the <span class="heavy">APEXSCIM</span> and <span class="heavy">RESTful Services</span> groups.  Click <span class="heavy">Create User.</span></p>
+                <img src="images/createuser4.jpg"/>  
+            </li>
+            <li><p>You can now perform a sanity check using Postman.</p>
+                <img src="images/createuser5.jpg"/>  
+            </li>
+                </ol>
+                <h2><a name="oauth">Creating the OAUTH Client</a></h2>
+                <p>If you plan to user an OAUTH login instead of Basic Authorization then perform the following.</p>
+                <ol>
+                    <li><p>Go to <span class="heavy">SQL Workshop</span> -> <span class="heavy">SQL Scripts</span> </p>
+                        <img src="images/install1.jpg"/>
+                        </li>
+                        <li>
+                        <p>Select the <span class="heavy">createoauthclient.sql</span> file and click <span class="heavy">Upload</span>.</span></p>
+                        <img src="images/createoauthclient1.jpg"/>  
+                    </li>
+                    <li><p>Click the <span class="heavy">arrow icon</span> in the <span class="heavy">Run</span> column.</p>
+                        <img src="images/install3.jpg"/> 
+                        <img src="images/createoauthclient2.jpg"/>  
+                    </li>
+                    <li><p>Next, you must obtain the Client Credentials.  Go to <span class="heavy">SQL Workshop - > SQL Commands</span>.</p>
+                        <img src="images/install1.jpg"/>  
+                        
+                     </li>
+                     <li> <p>Run the following SQL to obtain the client credential and secret.</p>
+                        <code>SELECT id, name, auth_flow, response_type, client_id, client_secret FROM USER_ORDS_CLIENTS;</code>
+                        
+                        <img src="images/createoauthclient3.jpg"/>  
+                    </li>
+                    <li> 
+                        <p>Test the OAUTH config from Postman</p>
+                            <img src="images/createoauthclient4.jpg"/>  
+                            <img src="images/createoauthclient5.jpg"/>  
+                            <img src="images/createoauthclient6.jpg"/>  
+                            <img src="images/createoauthclient7.jpg"/>  
+                            <p>The refresh token will be populated.</p>
+                            <img src="images/createoauthclient8.jpg"/>
+                    </li>
+                        </ol>
+                        <h2><a name="apppages">Application Pages</a></h2>
+                    <body>
+                        <ol>
+                            <li>
+                                <p>Server Requests - Displays the history of server SCIM requests.</p>
+                                <img src="images/pagesrequest.JPG"/>  
+                                <img src="images/pagesrequest1.JPG"/>  
+                                <img src="images/pagesrequest2.JPG"/>         
+                            </li>
+                            <li>
+                                <p>Config -> Parameters - Configurable Server Parameters</p>
+                                <img src="images/pagesparameters.jpg"/>          
+                            </li>
+                            <li>
+                                <p>Config -> Document Store - Configuration artifacts to support the endpoints.  The User and Group schemas can be edited.</p>
+                                <img src="images/pagesdocumentstore.jpg"/>     
+                                <img src="images/pagesdocumentstore1.jpg"/>      
+                            </li>
+                            <li>
+                                <p>Config -> Endpoints - Endpoint configurations to match the REST endpoints.</p>
+                                <img src="images/pagesendpoints.jpg"/>   
+                                <img src="images/pagesendpoints1.jpg"/>       
+                            </li>
+                            <li>
+                                <p>Config -> Attributes - A flat view of the attributes once parsed from the schemas(kept in document store).</p>
+                                <img src="images/pagesattributes.jpg"/>          
+                            </li>
+                            <li>
+                                <p>Config -> Filters - A list of the filters available for the SCIM filter parameter.</p>
+                                <img src="images/pagesfilters.jpg"/>    
+                                <img src="images/pagesfilters1.jpg"/>       
+                            </li>
+                            <li>
+                                <p>Resources -> Users: SCIM Users.</p>
+                                <img src="images/resourcesusers.jpg"/>  
+                                <img src="images/resourcesusers1.jpg"/>         
+                            </li>
+                            <li>
+                                <p>Resources -> Group Members: SCIM Group Members.</p>
+                                <img src="images/resourcesgroupmembers.jpg"/>          
+                            </li>
+                            <li>
+                                <p>Resources -> Groups: SCIM Groups.</p>
+                                <img src="images/resourcesgroups.jpg"/>          
+                            </li>
+                        </ol>
+                        <h2><a name="okta">Integrating With Okta</a></h2>
+                        <ol>
+                            <li>
+                                <p>Start by accessing the OKTA admin console.
+                                 Next, go to the <span class="heavy">Applications</span> menu and click <span class="heavy">Create App Integration</span>.</p>
+                                <img src="images/okta1.JPG"/>          
+                            </li>
+                            <li>
+                                <p>Select <span class="heavy">SAML 2.0</span> and click <span class="heavy">Next.</span></p>
+                                <img src="images/okta2.JPG"/>
+                            </li>
+                            <li>
+                                <p>Give the app a name and click <span class="heavy">Next.</span></p>
+                                <img src="images/okta3.JPG"/>
+                            </li>
+                            <li>
+                                <p>The SAML integration will not be fully implemented but you must supply required values.  Click <span class="heavy">Next.</span></p>
+                                <img src="images/okta4.JPG"/>
+                            </li>
+                            <li>
+                                <p>Select <span class="heavy">This is an internal app that we have created</span> and click <span class="heavy">Finish</span>.</p>          
+                            </li>
+                            <li><p>Go to the <span class="heavy">General Tab</span>, click <span class="heavy">Edit</span> and Select <span class="heavy">Enable SCIM Provisioning.</span>  Click <span class="heavy">Save</span>.</p>
+                            <img src="images/okta5.JPG"/>
+                            </li>
+                            <li>
+                                <p>Go to the <span class="heavy">Provisioning</span> tab and provide the SCIM Provisioning configuration.  
+                                The Import Groups action is not supported due to the apparent PUT call which APEX ORDS does not support.</p>
+                                <img src="images/okta6.JPG"/>
+                                <p>The HTTP Bearer header is being used for authentication in this example.  Configuring APEX authentication is covered in the APEX docs.
+                                The <span class="heavy">Test Configuration Connector</span> button should succeed.  Click <span class="heavy">Save</span>.</p>
+                                <img src="images/okta7.JPG"/>
+                            </li>
+                            <li>
+                                <p>Configure the <span class="heavy">To App</span> provisioning.  Password sync is not supported.  Click <span class="heavy">Save</span>.</p>
+                                <img src="images/okta8.JPG"/>
+                            </li>
+                            <li>
+                                <p>Configure the <span class="heavy">To Okta</span> provisioning.</p>
+                                <img src="images/okta9.JPG"/>
+                            </li>
+                            <li>
+                                <p>Click <span class="heavy">Import Now</span> to perform an import.</p>
+                                <img src="images/okta10.JPG"/>
+                            </li>
+                            <li>
+                                <p>Assign an OKTA group to the application. Click <span class="heavy">Assign to Groups</span>.</p>
+                                <img src="images/okta11.JPG"/>
+                                <p>Click <span class="heavy">Assign</span> next to the group. Click <span class="heavy">Save and Go Back</span>.  Click <span class="heavy">Done</span>.</p>
+                                <img src="images/okta12.JPG"/>
+                            </li>
+                            <li>
+                                <p>Assign a user to the group(not pictured).  Then go to the <span class="heavy">Push Groups</span> tab.  Click <span class="heavy">Assign to Groups</span>. Filter for the OKTA group and push the group membership APEX.</p>
+                                <img src="images/okta13.JPG"/>
+                                <p>Last push will update.</p>
+                                <img src="images/okta14.JPG"/>
+                            </li>
+                        </ol>
+                        <h2><a name="azure">Integrating With Azure</a></h2>
+                        <ol>
+                            <li>
+                                <p>Click <span class="heavy">create your own application</span></p>
+                                <img src="images/azure1.jpg"/>          
+                            </li>
+                            <li>
+                                <p>Click <span class="heavy">Provision User Accounts</span>.</p>
+                                <img src="images/azure2.jpg"/>          
+                            </li>
+                            <li>
+                                <p>Select <span class="heavy">automatic provisioning mode</span> and provide the credentials(bearer token).</p>
+                                <img src="images/azure3.jpg"/>          
+                            </li>
+                            <li>
+                                <p>Turn the <span class="heavy">provisioning status On</span> and click <span class="heavy">Save</span>.  The access token for provisioning can be obtained from Postman.</p>
+                                <img src="images/azure4.jpg"/>  
+                                <img src="images/azure4a.jpg"/>                 
+                            </li>
+                            <li>
+                                <p>Click <span class="heavy">Assign Users and Groups</span></p>
+                                <img src="images/azure5.jpg"/>          
+                            </li>
+                            <li>
+                                <p>Click <span class="heavy">Add User/Group</span>.  Click <span class="heavy">Users</span> -> None Selected -> Select the user(s) -> Click <span class="heavy">Select</span>.</p>
+                                <img src="images/azure6.jpg"/>          
+                            </li>
+                            <li>
+                                <p>Click <span class="heavy">Assign</span>.</p>
+                                <img src="images/azure7.jpg"/>          
+                            </li>
+                            <li>
+                                <p>The provisioning statut should appear with the status <span class="heavy">Success</span>.</p>
+                                <img src="images/azure8.jpg"/>          
+                            </li>
+                        </ol>
+        </body>
+</html>
