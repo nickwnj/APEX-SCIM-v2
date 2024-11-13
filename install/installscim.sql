@@ -2812,7 +2812,7 @@ begin
      ))) b
   on (a.id=lid)   
   when matched then update
-  set a.displayname=b.displayname, a.description=b.description, lastmodified=lts
+  set a.displayname=b.displayname, a.externalid=b.externalid, a.description=b.description, lastmodified=lts
   when not matched then insert 
   (id,externalid,displayname,description,created,lastmodified)
   values (lid,b.externalid,b.displayname,b.description,lts,lts);
