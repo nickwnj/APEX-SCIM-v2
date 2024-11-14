@@ -1,0 +1,594 @@
+{
+	"info": {
+		"_postman_id": "a808c4c4-439f-4001-9ce1-71b7b4c26b9c",
+		"name": "APEXSCIM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37686745"
+	},
+	"item": [
+		{
+			"name": "Users Get One",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "xIf-None-Match",
+						"value": "W/\"24102402590429\"",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/v2/Users/26C40D384AFD55CEE0631611A8C0BE79",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"Users",
+						"26C40D384AFD55CEE0631611A8C0BE79"
+					],
+					"query": [
+						{
+							"key": "startIndex",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "count",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "attributes",
+							"value": "userName,familyName,name",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add User Full",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/scim+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"schemas\": [\"urn:ietf:params:scim:schemas:core:2.0:User\"],\r\n   \"externalId\": \"84684651\",\r\n  \"userName\": \"marysmith@example.com\",\r\n  \"name\": {\r\n    \"formatted\": \"Mrs Mary Smith\",\r\n    \"familyName\": \"Smith\",\r\n    \"givenName\": \"Mary\",\r\n    \"middleName\": \"\",\r\n    \"honorificPrefix\": \"Mrs\",\r\n    \"honorificSuffix\": \"\"\r\n  },\r\n  \"displayName\": \"Mary Smith\",\r\n  \"nickName\": \"Mary\",\r\n  \"emails\": [\r\n    {\r\n      \"value\": \"marysmith@example.com\",\r\n      \"type\": \"work\",\r\n      \"primary\": true\r\n    }\r\n  ],\r\n  \"addresses\": [\r\n    {\r\n      \"type\": \"work\",\r\n      \"streetAddress\": \"100 Universal City Plaza\",\r\n      \"locality\": \"Hollywood\",\r\n      \"region\": \"NJ\",\r\n      \"postalCode\": \"91608\",\r\n      \"country\": \"USA\",\r\n      \"primary\": true\r\n    },\r\n    {\r\n      \"type\": \"home\",\r\n      \"streetAddress\": \"456 Hollywood Blvd\",\r\n      \"locality\": \"Flanders\",\r\n      \"region\": \"NJ\",\r\n      \"postalCode\": \"07836\",\r\n      \"country\": \"USA\",\r\n      \"formatted\": \"\"\r\n    }\r\n  ],\r\n  \"phoneNumbers\": [\r\n    {\r\n      \"value\": \"(111)222-3333\",\r\n      \"type\": \"work\"\r\n    }\r\n  ],\r\n  \"userType\": \"Employee\",\r\n  \"title\": \"Manager\",\r\n  \"preferredLanguage\": \"en-US\",\r\n  \"locale\": \"en-US\",\r\n  \"timezone\": \"America/New_York\",\r\n  \"active\":true\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/v2/Users",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"Users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/scim+json",
+						"type": "text"
+					},
+					{
+						"key": "If-Match",
+						"value": "W/\"24100103002683\"",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"schemas\": [\"urn:ietf:params:scim:schemas:core:2.0:User\"],\r\n   \"externalId\": \"84684651\",\r\n  \"userName\": \"marysmithzz@example.com\",\r\n  \"name\": {\r\n    \"formatted\": \"Mrs Mary Smith\",\r\n    \"familyName\": \"Smithzz\",\r\n    \"givenName\": \"Mary\",\r\n    \"middleName\": \"\",\r\n    \"honorificPrefix\": \"Mrs\",\r\n    \"honorificSuffix\": \"\"\r\n  },\r\n  \"displayName\": \"Mary Smith\",\r\n  \"nickName\": \"Mary\",\r\n  \"emails\": [\r\n    {\r\n      \"value\": \"marysmith@example.com\",\r\n      \"type\": \"work\",\r\n      \"primary\": true\r\n    }\r\n  ],\r\n  \"addresses\": [\r\n    {\r\n      \"type\": \"work\",\r\n      \"streetAddress\": \"100 Universal City Plaza\",\r\n      \"locality\": \"Hollywood\",\r\n      \"region\": \"NJ\",\r\n      \"postalCode\": \"91608\",\r\n      \"country\": \"USA\",\r\n      \"primary\": true\r\n    },\r\n    {\r\n      \"type\": \"home\",\r\n      \"streetAddress\": \"456 Hollywood Blvd\",\r\n      \"locality\": \"Flanders\",\r\n      \"region\": \"NJ\",\r\n      \"postalCode\": \"07836\",\r\n      \"country\": \"USA\",\r\n      \"formatted\": \"\"\r\n    }\r\n  ],\r\n  \"phoneNumbers\": [\r\n    {\r\n      \"value\": \"(111)222-3333\",\r\n      \"type\": \"work\"\r\n    }\r\n  ],\r\n  \"userType\": \"Employee\",\r\n  \"title\": \"Manager\",\r\n  \"preferredLanguage\": \"en-US\",\r\n  \"locale\": \"en-US\",\r\n  \"timezone\": \"America/New_York\",\r\n  \"active\":true\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/v2/Users/26C40D384AFD55CEE0631611A8C0BE79",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"Users",
+						"26C40D384AFD55CEE0631611A8C0BE79"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users Search",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "xIf-None-Match",
+						"value": "W/\"24100203003556\"",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"schemas\": [\"urn:ietf:params:scim:api:messages:2.0:SearchRequest\"],\r\n     \"attributes\": [\"displayName\", \"userName\"],\r\n     \"startIndex\": 1,\r\n     \"count\": 100\r\n   }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/v2/Users/.search",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"Users",
+						".search"
+					],
+					"query": [
+						{
+							"key": "startIndex",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "count",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "attributes",
+							"value": "userName,familyName,name",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/v2/Users/26C40D384AFD55CEE0631611A8C0BE79",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"Users",
+						"26C40D384AFD55CEE0631611A8C0BE79"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users Get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/v2/Users",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"Users"
+					],
+					"query": [
+						{
+							"key": "startIndex",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "count",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "attributes",
+							"value": "userName,name,name.familyName",
+							"disabled": true
+						},
+						{
+							"key": "excludedAttributes",
+							"value": "userName,name",
+							"disabled": true
+						},
+						{
+							"key": "filter",
+							"value": "userType ne \"Contractor\"",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Groups Add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"schemas\": [\"urn:ietf:params:scim:schemas:core:2.0:Group\"],\r\n     \"externalId\": \"0311A8C0D199@@@9\",\r\n     \"displayName\": \"PARENTGOUP\",\r\n     \"description\": \"This is a group that has nested subgroups.\",\r\n     \"members\": [{\r\n         \"value\": \"25312F67F1549B6BE0630311A8C0E520\",\r\n         \"type\": \"User\"\r\n     },\r\n     {\r\n         \"value\": \"258BECCEE09AC463E0631611A8C012BB\",\r\n         \"type\": \"User\"},\r\n         {\r\n         \"value\": \"258B131ADCACF73AE0631611A8C00895\",\r\n         \"type\": \"Group\"}]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/v2/Groups",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"Groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Groups Update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \"schemas\": [\"urn:ietf:params:scim:schemas:core:2.0:Group\"],\r\n     \"externalId\": \"0311A8C0D199@@@9zzz\",\r\n     \"displayName\": \"PARENTGOUPzzz\",\r\n     \"description\": \"This is a group that has nested subgroups.zzz\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/v2/Groups/26C379677E78333BE0631611A8C0D3B0",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"Groups",
+						"26C379677E78333BE0631611A8C0D3B0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Groups Get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/v2/Groups",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"Groups"
+					],
+					"query": [
+						{
+							"key": "startIndex",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "count",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "attributes",
+							"value": "displayName",
+							"disabled": true
+						},
+						{
+							"key": "filter",
+							"value": "meta.lastModified gt \"2011-05-13T04:42:34Z\"",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Groups Search",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"schemas\": [\"urn:ietf:params:scim:api:messages:2.0:SearchRequest\"],\r\n     \"filter\": \"externalId eq \\\"0311A8C0D199@@@9\\\"\",\r\n     \"attributes\": [\"displayName\"],\r\n     \"startIndex\": 1,\r\n     \"count\": 9\r\n   }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/v2/Groups/.search",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"Groups",
+						".search"
+					],
+					"query": [
+						{
+							"key": "startIndex",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "count",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "attributes",
+							"value": "displayName",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Groups Get One",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/v2/Groups/8C56B0E0630311A8C0D1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"Groups",
+						"8C56B0E0630311A8C0D1"
+					],
+					"query": [
+						{
+							"key": "startIndex",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "count",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "attributes",
+							"value": "displayName",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Groups Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/v2/Groups/26C379677E78333BE0631611A8C0D3B0",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"Groups",
+						"26C379677E78333BE0631611A8C0D3B0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ResourceTypes Get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/v2/ResourceTypes",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"ResourceTypes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ResourceTypes Get User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/v2/ResourceTypes/User",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"ResourceTypes",
+						"User"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ServiceProviderConfig Get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/v2/ServiceProviderConfig",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"ServiceProviderConfig"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Schemas Get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/v2/Schemas",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"Schemas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Schemas Get Groups",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/v2/Schemas/Group",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"Schemas",
+						"Group"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "clientSecret",
+				"value": "{{client_secret}}",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{client_id}}",
+				"type": "string"
+			},
+			{
+				"key": "refreshTokenUrl",
+				"value": "{{base_url}}/oauth/token",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "{{base_url}}/oauth/token",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "client_credentials",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "APEX",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "https://apex.oracle.com/pls/apex/apexscim/oauth/token",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
