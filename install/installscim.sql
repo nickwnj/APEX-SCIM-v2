@@ -460,19 +460,19 @@ from v_schema_attr a;
                                                  ,key 'region' value c.region
                                                  ,key 'postalCode' value c.postalcode
                                                  ,key 'country' value c.country
-                                                 ,key 'formatted' value c.formatted FORMAT JSON ABSENT ON NULL
+                                                 ,key 'formatted' value c.formatted
                                                  ) FORMAT JSON ABSENT ON NULL) 
                                                  from usr_address c
                                                  where c.usrid=b.id) addresses
        , (select json_arrayagg(json_object(key 'value' value c.value
                                                  ,key 'type' value c.type
-                                                 ,key 'primary' value c.primary FORMAT JSON ABSENT ON NULL
+                                                 ,key 'primary' value c.primary
                                                  ) FORMAT JSON ABSENT ON NULL) 
                                                  from usr_phone c
                                                  where c.usrid=b.id) phonenumbers
               , (select json_arrayagg(json_object(key 'value' value c.value
                                                  ,key 'type' value c.type
-                                                 ,key 'primary' value c.primary FORMAT JSON ABSENT ON NULL
+                                                 ,key 'primary' value c.primary
                                                  ) FORMAT JSON ABSENT ON NULL) 
                                                  from usr_email c
                                                  where c.usrid=b.id
